@@ -1,0 +1,39 @@
+{
+  "logLevel": "info",
+  "context": "http://127.0.0.1",
+  "port": 8091,
+  "allowedCorsOrigins": [
+    "https://ominto.com",
+    "https://alpha.ominto.com",
+    "https://beta.ominto.com",
+    "https://admin.ominto.com",
+    "https://alpha.dubli.com",
+    "https://dubli.com",
+    "https://inficashback.com"
+  ],
+  "dbconf":{
+    "uri": "mongodb://localhost:27017/dubli",
+    "options": {
+      "useMongoClient": true,
+      "user": "appUser",
+      "pass": "password"
+    }
+  },
+  "dbcollection":{
+    "txn_data": "txn_data",
+    "api_failure": "api_failure",
+    "parsing_failure": "parsing_failure"
+  },
+  "notification": {
+    "smtpConfig": {
+        "host": "smtp.gmail.com",
+        "port": 465,
+        "secure": true,
+        "auth": {
+            "user": "notifications@ominto.com",
+            "pass": "Ominto2016"
+        }
+    },
+    "adminPortalLink": "https://devportal.ominto.com/start#"
+  }
+}

@@ -1,0 +1,107 @@
+{
+    "apiResponse": {
+        "job_id": {
+            "type": "Number",
+            "required": true,
+            "unique": true
+        },
+        "affiliate_id": {
+            "type": "Number",
+            "required": true
+        },
+        "affiliate_name": {
+            "type": "String",
+            "required": true
+        },
+        "time": {
+            "type": "Date",
+            "required": true
+        },
+        "data": {
+            "type": "Object",
+            "required": true
+        }
+    },
+    "txnData": {
+        "job_id": {
+            "type": "Number",
+            "required": true,
+            "unique": true
+        },
+        "affiliate_id": {
+            "type": "Number",
+            "required": true
+        },
+        "affiliate_name": {
+            "type": "String",
+            "required": true
+        },
+        "time": {
+            "type": "Date",
+            "required": true
+        },
+        "data": {
+            "tb_kinesis": "Object",
+            "lambda_data": "Object",
+            "data_db": "Object"
+        }
+    },
+    "apiFailure": {
+        "job_id": {
+            "type": "Number",
+            "required": true,
+            "unique": true
+        },
+        "affiliate_id": {
+            "type": "Number",
+            "required": true
+        },
+        "affiliate_name": {
+            "type": "String",
+            "required": true
+        },
+        "time": {
+            "type": "Date",
+            "required": true
+        },
+        "type": {
+            "type": "String",
+            "required": true
+        },
+        "module": {
+            "type": "String",
+            "required": true
+        }
+    },
+    "parsingFailure": {
+        "job_id": {
+            "type": "Number",
+            "required": true,
+            "unique": true
+        },
+        "affiliate_id": {
+            "type": "Number",
+            "required": true
+        },
+        "affiliate_name": {
+            "type": "String",
+            "required": true
+        },
+        "time": {
+            "type": "Date",
+            "required": true
+        },
+        "type": {
+            "type": "String",
+            "required": true
+        },
+        "module": {
+            "type": "String",
+            "required": true
+        },
+        "data": {
+            "type": "Object",
+            "required": true
+        }
+    }
+}

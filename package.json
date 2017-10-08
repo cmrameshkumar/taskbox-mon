@@ -1,0 +1,64 @@
+{
+  "name": "taskbox-mon",
+  "version": "1.0.0",
+  "description": "Service module for task-box monitoring",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm install && node --harmony src/server.js | bunyan",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ramesh",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/dubli/issues/issues"
+  },
+  "homepage": "https://ominto.com",
+  "dependencies": {
+    "bunyan": "^1.3.5",
+    "crypto": "^1.0.1",
+    "co": "^4.5.4",
+    "joi": "^6.8.1",
+    "json-stable-stringify": "^1.0.0",
+    "jsonwebtoken": "^5.4.0",
+    "koa": "^1.1.0",
+    "koa-cache-control": "^1.0.0",
+    "koa-joi-router": "git+ssh://git@github.com/toadzky/koa-joi-router#HEAD",
+    "koa-logger": "^1.2.2",
+    "koa-mount": "^1.3.0",
+    "koa-qs": "^2.0.0",
+    "koa-route": "^2.4.2",
+    "koa-session-redis": "^1.1.0",
+    "koa-useragent": "^0.1.1",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "mongoose": "^4.11.14",
+    "nodemailer": "^2.7.2",
+    "ominto-utils": "file:../utils",
+    "range_check": "^1.2.0",
+    "request": "2.80.0",
+    "request-promise": "^1.0.2",
+    "statuses": "^1.2.1",
+    "thirty-two": "^1.0.1",
+    "uuid": "^3.1.0",
+    "xml2js": "^0.4.16"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "chalk": "^1.1.1",
+    "http-assert": "^1.1.1",
+    "http-errors": "^1.3.1",
+    "i": "^0.3.3",
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.0",
+    "nock": "^4.0.0",
+    "ominto-substandard": "git+ssh://git@github.com/dubli/substandard.git",
+    "ominto-tools": "git+ssh://git@github.com/dubli/tools.git#master",
+    "sinon": "^1.16.1",
+    "table": "^3.7.8"
+  },
+  "substandard": {
+    "ignore": [
+      "/test/"
+    ]
+  }
+}
