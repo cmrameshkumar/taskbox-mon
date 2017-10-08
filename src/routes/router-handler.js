@@ -73,6 +73,9 @@ function* saveParsingFailure() {
     return this.status = 200;
 }
 
+/**
+ * Method to save the transaction data to the monitoring database
+ */
 function* saveTxnData() {
 
     var message = this.request.body;
