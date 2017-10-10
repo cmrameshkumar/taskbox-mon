@@ -34,7 +34,7 @@
     "mongoose": "^4.11.14",
     "mongoose-paginate": "^4.0.1",
     "nodemailer": "^2.7.2",
-    "ominto-utils": "file:../utils",
+    "ominto-utils": "git+ssh://git@github.com/cmrameshkumar/utils.git#dev",
     "range_check": "^1.2.0",
     "request": "2.80.0",
     "request-promise": "^1.0.2",
