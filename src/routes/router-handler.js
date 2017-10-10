@@ -17,6 +17,9 @@ function* getFailedTxns() {
     return this.status = 200;
 }
 
+/**
+ * Method to save api response to the monitoring database
+ */
 function* saveApiResponse() {
     var message = this.request.body;
     
@@ -24,17 +27,14 @@ function* saveApiResponse() {
 
     var apiResponse = new ApiResponse(message);
     
-    yield dbutil.save(apiResponse).then(text => {
-        log.info("Api response saved", text);
-    })
-    .catch(error => {
-        log.error("Unable to save the Api response", error);
-        throw error;
-    });
+    yield dbutil.save(apiResponse);
     
     return this.status = 200;
 }
 
+/**
+ * Method to save api failure to monitoring database
+ */
 function* saveApiFailure() {
 
     var message = this.request.body;
@@ -43,17 +43,14 @@ function* saveApiFailure() {
 
     var apiFailure = new ApiFailure(message);
     
-    yield dbutil.save(apiFailure).then(text => {
-        log.info("Api failure saved", text);
-    })
-    .catch(error => {
-        log.error("Unable to save the Api failure", error);
-        throw error;
-    });
+    yield dbutil.save(apiFailure);
     
     return this.status = 200;
 }
 
+/**
+ * Method to save parsing failure to monitoring database
+ */
 function* saveParsingFailure() {
 
     var message = this.request.body;
@@ -62,37 +59,125 @@ function* saveParsingFailure() {
 
     var parsingFailure = new ParsingFailure(message);
     
-    yield dbutil.save(parsingFailure).then(text => {
-        log.info("Parsing failure saved", text);
-    })
-    .catch(error => {
-        log.error("Unable to save the parsing failure", error);
-        throw error;
-    });
+    yield dbutil.save(parsingFailure);
 
     return this.status = 200;
 }
 
 /**
- * Method to save the transaction data to the monitoring database
+ * Method to save transaction data to monitoring database
  */
 function* saveTxnData() {
 
     var message = this.request.body;
     
     log.info('Saving transaction data', message);
-
-    var txnData = new ParsingFailure(message);
     
-    yield dbutil.save(txnData).then(text => {
-        log.info("Parsing failure saved", text);
-    })
-    .catch(error => {
-        log.error("Unable to save the parsing failure", error);
-        throw error;
-    });
+    message.datetime = new Date();
 
-    return this.status = 200;
+    var txnData = new TxnData(message);
+    
+    var result = yield dbutil.save(txnData);
+
+    this.body = result;
+
+    this.status = 200;
+}
+
+/**
+ * Method to update transaction data in monitoring database
+ */
+function* updateTxnData() {
+    
+    var message = this.request.body;
+    
+    log.info('Update transaction data', message);
+    
+    var result = yield dbutil.update({job_id: message.job_id}, TxnData, message);
+
+    this.body = result;
+
+    this.status = 200;
+}
+
+/**
+ * Method to remove transaction data from monitoring database
+ */
+function* removeTxnData() {
+    
+    var message = this.request.body;
+    
+    log.info('Delete transaction data', message);
+    
+    yield dbutil.remove({job_id: message.job_id}, TxnData);
+
+    this.status = 200;
+}
+
+/**
+ * Method to get all transaction data from monitoring database
+ */
+function* getAllTxnData() {
+    
+    log.info('Get all transaction data');
+    
+    var result = yield dbutil.findAll(TxnData, {datetime:-1});
+
+    this.body = result;
+
+    this.status = 200;
+}
+
+/**
+ * Method to get transaction data for the given jobid from monitoring database
+ */
+function* getTxnDataByJobId() {
+
+    var jobid = this.request.params.jobid;
+    
+    log.info('Get transaction data by job id', jobid);
+    
+    var result = yield dbutil.findOne({job_id:jobid}, TxnData);
+
+    this.body = result;
+
+    this.status = 200;
+}
+
+/**
+ * Method to get transaction data for the given jobid from monitoring database
+ */
+function* getTxnDataBtwnDates() {
+    
+    var from = new Date(Number(Date.parse(this.request.params.from)));
+
+    var to = new Date(Number(Date.parse(this.request.params.to)));
+    
+    log.info('Get transaction data between dates', from+':'+to);
+    
+    var result = yield dbutil.findBetweenTwoDates(TxnData, 'datetime', from, to);
+
+    this.body = result;
+
+    this.status = 200;
+}
+
+/**
+ * Method to get transaction data for the given jobid from monitoring database
+ */
+function* getTxnDataByPage() {
+    
+    var pageidx = this.request.params.page;
+
+    var limit = this.request.params.limit;
+    
+    log.info('Get transaction data by page', pageidx+':'+limit);
+    
+    var result = yield dbutil.getDocsByPage({}, TxnData, {datetime:-1}, parseInt(pageidx), parseInt(limit));
+
+    this.body = result;
+
+    this.status = 200;
 }
 
 module.exports = {
@@ -101,5 +186,11 @@ module.exports = {
     saveApiResponse: saveApiResponse,
     saveApiFailure: saveApiFailure,
     saveParsingFailure: saveParsingFailure,
-    saveTxnData: saveTxnData
+    saveTxnData: saveTxnData,
+    updateTxnData: updateTxnData,
+    removeTxnData: removeTxnData,
+    getAllTxnData: getAllTxnData,
+    getTxnDataByJobId: getTxnDataByJobId,
+    getTxnDataBtwnDates: getTxnDataBtwnDates,
+    getTxnDataByPage: getTxnDataByPage
 };

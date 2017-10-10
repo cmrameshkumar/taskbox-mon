@@ -39,6 +39,7 @@ function init (id) {
       });
 
       var name = id + ':taskbox-mon:api';
+
       global.log = utils.appLog.createLogger('taskbox-mon', name, configs);
       log.level(configs.logLevel);
 
@@ -47,6 +48,8 @@ function init (id) {
       app.proxy = true;
 
       app.on('error', function (err, ctx) {
+
+        console.log("error....",err);
         utils.errorHandler(err, ctx || {}, _.get(ctx, 'state.logger', log));
       });
 
@@ -54,6 +57,7 @@ function init (id) {
         try {
           yield next;
         } catch (err) {
+          console.log("app error....",err);
           utils.errorHandler(err, this, _.get(this, 'state.logger', log));
         }
       });

@@ -32,6 +32,7 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "mongoose": "^4.11.14",
+    "mongoose-paginate": "^4.0.1",
     "nodemailer": "^2.7.2",
     "ominto-utils": "file:../utils",
     "range_check": "^1.2.0",

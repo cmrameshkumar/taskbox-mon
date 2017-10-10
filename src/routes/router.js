@@ -49,11 +49,53 @@ router.route({
   validate: {
     type: 'json'
   },
-  handler: handler.saveParsingFailure
+  handler: handler.saveTxnData
+});
+
+router.route({
+  method: 'POST',
+  path: '/tbmon/updateTxnData',
+  validate: {
+    type: 'json'
+  },
+  handler: handler.updateTxnData
+});
+
+router.route({
+  method: 'DELETE',
+  path: '/tbmon/removeTxnData',
+  validate: {
+    type: 'json'
+  },
+  handler: handler.removeTxnData
+});
+
+router.route({
+  method: 'GET',
+  path: '/tbmon/getAllTxnData',
+  handler: handler.getAllTxnData
+});
+
+router.route({
+  method: 'GET',
+  path: '/tbmon/getTxnDataByJobId/:jobid',
+  handler: handler.getTxnDataByJobId
+});
+
+router.route({
+  method: 'GET',
+  path: '/tbmon/getTxnDataBtwnDates/:from/:to',
+  handler: handler.getTxnDataBtwnDates
+});
+
+router.route({
+  method: 'GET',
+  path: '/tbmon/getTxnData/:page/:limit',
+  handler: handler.getTxnDataByPage
 });
 
 function setup () {
   return router.middleware();
 }
-
+ 
 module.exports = setup;
