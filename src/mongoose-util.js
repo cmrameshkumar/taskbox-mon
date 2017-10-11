@@ -144,8 +144,6 @@ function getDocsByPage(condition, model, sorting, pageidx, pagelimit){
     if(sorting != undefined){
         options.sort = sorting;
     }
-
-    console.log(options);
     
     return model.paginate(condition, options).then(function(result){
         log.info("Documents("+model.collection.collectionName+") for query("+condition+")!", result);
